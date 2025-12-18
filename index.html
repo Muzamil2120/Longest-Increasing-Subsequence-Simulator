@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIS Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <h1 id="mainTitle">LIS Simulator</h1>
+
+    <div class="input-group">
+      <input type="text" id="arrayInput" placeholder="Enter numbers or characters">
+      <button class="btn-small" onclick="generateRandomInput()" title="Generate Random Sequence">🎲 Random</button>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="runDP()">Run LIS O(n²)</button>
+      <button class="btn btn-secondary" onclick="runOptimized()">Run LIS (Optimized) O(n log n)</button>
+    </div>
+
+    <div class="result-section">
+      <h3>Result</h3>
+      <div id="output" class="output-box">Run an algorithm to see the result here...</div>
+    </div>
+
+    <div class="extra-features">
+      <div class="history-section">
+        <h4>📜 History</h4>
+        <ul id="historyList"></ul>
+      </div>
+
+      <div class="perf-section">
+        <h4>📈 Performance Comparison</h4>
+        <button id="compareBtn" class="btn btn-primary btn-compare" onclick="comparePerformance()">Compare Performance</button>
+        <div id="perfStatus" class="perf-status"></div>
+        <canvas id="perfChart" class="perf-canvas" width="520" height="260"></canvas>
+      </div>
+      
+      <div class="theory-section">
+        <button class="btn-text" onclick="toggleTheory()">📘 How it Works (Code & Theory)</button>
+        <div id="theoryContent" class="hidden">
+          <div class="theory-card">
+            <h5>Dynamic Programming O(n²)</h5>
+            <p>We build an array <code>dp[]</code> where <code>dp[i]</code> is the length of the LIS ending at index <code>i</code>.</p>
+            <pre>
+for i from 1 to n-1:
+  for j from 0 to i-1:
+    if arr[i] > arr[j]:
+      dp[i] = max(dp[i], dp[j] + 1)</pre>
+          </div>
+          <div class="theory-card">
+            <h5>Optimized Approach O(n log n)</h5>
+            <p>We maintain a list of "tails". For each element, we use Binary Search to replace the smallest tail greater than or equal to it, or extend the list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="algorithms/dp.js"></script>
+<script src="algorithms/binarySearch.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
